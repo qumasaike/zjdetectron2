@@ -102,11 +102,13 @@ def register_all_coco(root):
     for dataset_name, splits_per_dataset in _PREDEFINED_SPLITS_COCO.items():
         for key, (image_root, json_file) in splits_per_dataset.items():
             # Assume pre-defined datasets live in `./datasets`.
+            json_file = json_file.replace('coco', 'nuimages_nuscenes')
             register_coco_instances(
                 key,
                 _get_builtin_metadata(dataset_name),
                 os.path.join(root, json_file) if "://" not in json_file else json_file,
-                os.path.join(root, image_root),
+                # os.path.join(root, image_root),
+                ''
             )
 
     for (

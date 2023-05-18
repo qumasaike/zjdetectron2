@@ -152,6 +152,9 @@ class Metadata(types.SimpleNamespace):
         except AttributeError:
             super().__setattr__(key, val)
 
+    def hardsetpatch(self, key, val):
+        super().__setattr__(key, val)
+
     def as_dict(self):
         """
         Returns all the metadata as a dict.

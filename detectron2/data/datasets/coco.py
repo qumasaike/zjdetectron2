@@ -77,8 +77,8 @@ def load_coco_json(json_file, image_root, dataset_name=None, extra_annotation_ke
         cats = coco_api.loadCats(cat_ids)
         # The categories in a custom json file may not be sorted.
         thing_classes = [c["name"] for c in sorted(cats, key=lambda x: x["id"])]
-        meta.thing_classes = thing_classes
-
+        # meta.thing_classes = thing_classes
+        meta.hardsetpatch("thing_classes", thing_classes)
         # In COCO, certain category ids are artificially removed,
         # and by convention they are always ignored.
         # We deal with COCO's id issue and translate
@@ -95,7 +95,8 @@ Category ids in annotations are not in [1, #categories]! We'll apply a mapping f
 """
                 )
         id_map = {v: i for i, v in enumerate(cat_ids)}
-        meta.thing_dataset_id_to_contiguous_id = id_map
+        # meta.thing_dataset_id_to_contiguous_id = id_map
+        meta.hardsetpatch("thing_dataset_id_to_contiguous_id", id_map)
 
     # sort indices for reproducible results
     img_ids = sorted(coco_api.imgs.keys())

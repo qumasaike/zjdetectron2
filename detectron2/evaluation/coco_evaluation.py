@@ -371,6 +371,12 @@ class COCOEvaluator(DatasetEvaluator):
             precision = precision[precision > -1]
             ap = np.mean(precision) if precision.size else float("nan")
             results_per_category.append(("{}".format(name), float(ap * 100)))
+            start_id = 0
+            while(start_id < len(precision)):
+                print(name + ": ", np.mean(precision[start_id: start_id + 101]))
+                # start_id += 101
+                break
+            print()
 
         # tabulate it
         N_COLS = min(6, len(results_per_category) * 2)
